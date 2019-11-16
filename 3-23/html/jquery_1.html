@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+</head>
+<body>
+<div id="div_1">div_1</div>
+<input type="text" id="name" name="name" value="name">
+<br>
+<input type="button" id="b_1" name="b_1" value="隐藏">
+<input type="button" id="b_2" name="b_2" value="显示">
+<br>
+<input type="button" id="b_3" name="b_3" value="隐藏">
+<br>
+<input type="button" id="b_4" name="b_4" value="收缩">
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script>
+    //    alert($("#div_1").html());
+    $("#div_1").html("i see you Jquery");
+    //    alert($("#name").val());
+    $("#name").val("I know Jquery");
+
+    //动态元素添加
+    $("body").append("<div id='div_2'>div_2</div>");
+    $("#div_2").css("position", "absolute").css("top", "150px").css("left", "100px").css("width", "200px").css("height", "200px").css("border", "solid 1px #FF0000");
+    $("#b_1").click(function () {
+        $("#div_2").hide(3000);
+    });
+    $("#b_2").click(function () {
+        $("#div_2").show(3000)
+    });
+
+    //开关变量
+    var b_state = true;
+    $("#b_3").click(function () {
+        if (b_state === true) {
+            $("#div_2").hide(3000);
+            b_state = false;
+            $("#b_3").val("显示")
+        } else {
+            $("#div_2").show(3000);
+            b_state = true;
+            $("#b_3").val("隐藏")
+        }
+    });
+
+
+    $("#b_4").click(function () {
+        var interval = window.setInterval(function () {
+            $("#div_2")
+                .css("top", parseInt($("#div_2").css("top")) + 1 + "px")
+                .css("left", parseInt($("#div_2").css("left")) + 1 + "px")
+                .css("width", parseInt($("#div_2").css("width")) - 2 + "px")
+                .css("height", parseInt($("#div_2").css("height")) - 2 + "px");
+            if (parseInt($("#div_2").css("width")) < 45) {
+                clearInterval(interval);
+            }
+        }, 10)
+    });
+</script>
+</body>
+</html>
